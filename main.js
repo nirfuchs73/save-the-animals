@@ -1,6 +1,7 @@
 
 var FileService = require('./services/file-service');
 var ImgService = require('./services/img-service');
+var PDFService = require('./services/pdf-service');
 
 const cheerio = require('cheerio');
 
@@ -31,7 +32,7 @@ FileService.loadCSV('../rareAnimals.csv')
         // then return a promise that resolved when ALL imgs were downloaded.
         // console.log('animalsWithImgUrls', animalsWithImgUrls);
         var prms = animalsWithImgUrls.map((animal) => {
-            return FileService.download(animal.imgUrl, `imgs/${animal.name}.jpg`);
+            return FileService.download(animal.imgUrl, `imgs/${animal.name}.png`);
         });
         return Promise.all(prms)
             .then(res => {
@@ -42,5 +43,6 @@ FileService.loadCSV('../rareAnimals.csv')
     })
     .then(animalsWithImgs => {
         // TODO: Use the PDFService to build the animals
-        console.log('animalsWithImgs', animalsWithImgs);
+        // console.log('animalsWithImgs', animalsWithImgs);
+        PDFService.buildAnimalsPDF(animalsWithImgs);
     });
