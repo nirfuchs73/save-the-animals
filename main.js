@@ -19,9 +19,9 @@ FileService.loadCSV('../rareAnimals.csv')
         return Promise.all(prms)
             .then(res => {
                 animals.map((animal, idx) => {
-                    const $ = cheerio.load(res[idx]);
-                    var url = $('img.srp-asset-image').attr('src');
-                    animal.imgUrl = url;
+                    // const $ = cheerio.load(res[idx]);
+                    // var url = $('img.srp-asset-image').attr('src');
+                    animal.imgUrl = res[idx];
                 })
                 // console.log(animals);
                 return Promise.resolve(animals);
